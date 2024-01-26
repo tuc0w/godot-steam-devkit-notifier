@@ -1,0 +1,9 @@
+# Godot 4+ specific ignores
+.godot/
+build/
+
+export_presets.cfg
+project.godot
+
+icon.svg
+*.import

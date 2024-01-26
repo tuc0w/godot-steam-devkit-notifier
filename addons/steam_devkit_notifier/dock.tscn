@@ -1,0 +1,65 @@
+[gd_scene load_steps=2 format=3 uid="uid://bo2dfyxx7tfjo"]
+
+[ext_resource type="Script" path="res://addons/steam_devkit_notifier/dock.gd" id="1_0xwbs"]
+
+[node name="Devkit" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0xwbs")
+title_name_path = NodePath("VBoxContainer/HBoxContainer/LineEdit")
+auto_upload_switch_path = NodePath("VBoxContainer/HBoxContainer2/CheckButton")
+request_path = NodePath("DevkitRequest")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 12
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "Title Name"
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Luminous_Journey"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "Auto notify"
+
+[node name="CheckButton" type="CheckButton" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+button_pressed = true
+
+[node name="SendButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Send notification"
+
+[node name="SaveButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Save settings"
+
+[node name="DevkitRequest" type="HTTPRequest" parent="."]
+
+[connection signal="pressed" from="VBoxContainer/SendButton" to="." method="_on_send_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/SaveButton" to="." method="_on_save_button_pressed"]
