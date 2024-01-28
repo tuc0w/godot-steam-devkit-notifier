@@ -10,8 +10,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_0xwbs")
-title_name_path = NodePath("VBoxContainer/HBoxContainer/LineEdit")
-auto_upload_switch_path = NodePath("VBoxContainer/HBoxContainer2/CheckButton")
+title_name_path = NodePath("VBoxContainer/TitleNameContainer/TitleNameInput")
+auto_upload_switch_path = NodePath("VBoxContainer/AutoNotifyContainer/AutoNotifyCheckButton")
+linux_only_switch_path = NodePath("VBoxContainer/NotifyLinuxContainer/NotifyLinuxCheckButton")
 request_path = NodePath("DevkitRequest")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
@@ -23,30 +24,51 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 12
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="TitleNameContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="VBoxContainer/TitleNameContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 text = "Title Name"
+vertical_alignment = 1
 
-[node name="LineEdit" type="LineEdit" parent="VBoxContainer/HBoxContainer"]
+[node name="TitleNameInput" type="LineEdit" parent="VBoxContainer/TitleNameContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Luminous_Journey"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+[node name="AutoNotifyContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2"]
+[node name="Label" type="Label" parent="VBoxContainer/AutoNotifyContainer"]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
-text = "Auto notify"
+text = "Auto notify on export"
+vertical_alignment = 1
+autowrap_mode = 3
 
-[node name="CheckButton" type="CheckButton" parent="VBoxContainer/HBoxContainer2"]
+[node name="AutoNotifyCheckButton" type="CheckButton" parent="VBoxContainer/AutoNotifyContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+button_pressed = true
+
+[node name="NotifyLinuxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/NotifyLinuxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "Only notify if exported platform is linux"
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="NotifyLinuxCheckButton" type="CheckButton" parent="VBoxContainer/NotifyLinuxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 button_pressed = true
@@ -61,5 +83,8 @@ text = "Save settings"
 
 [node name="DevkitRequest" type="HTTPRequest" parent="."]
 
+[connection signal="text_changed" from="VBoxContainer/TitleNameContainer/TitleNameInput" to="." method="_on_title_name_input_text_changed"]
+[connection signal="pressed" from="VBoxContainer/AutoNotifyContainer/AutoNotifyCheckButton" to="." method="_on_auto_notify_check_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/NotifyLinuxContainer/NotifyLinuxCheckButton" to="." method="_on_notify_linux_check_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/SendButton" to="." method="_on_send_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/SaveButton" to="." method="_on_save_button_pressed"]
