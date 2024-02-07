@@ -11,8 +11,8 @@ var has_loaded = false
 func _enter_tree() -> void:
 	if has_loaded:
 		return
-
-	add_autoload_singleton("DevkitMessenger", "devkit_messenger.gd")
+	if !ProjectSettings.has_setting("autoload/DevkitMessenger"):
+		add_autoload_singleton("DevkitMessenger", "devkit_messenger.gd")
 	add_control_to_dock(DOCK_SLOT_LEFT_BR, dock)
 	add_export_plugin(export_notifier_plugin)
 	has_loaded = true
