@@ -15,6 +15,3 @@ If the auto notify is enabled, the plugin will automatically notify the Steam De
 
 ### Manual Update
 If the auto notify is disabled, you can manually notify the Steam Devkit Management Tool to upload the game by clicking on the "Send notification" button in the Devkit tab.
-
-## Known Issues
-- It is likely to happen that the plugin will send multiple notifications to the Steam Devkit Management Tool, this will be fixed in a future update.
