@@ -1,8 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://bo2dfyxx7tfjo"]
+[gd_scene load_steps=4 format=3 uid="uid://bo2dfyxx7tfjo"]
 
 [ext_resource type="Script" path="res://addons/steam_devkit_notifier/dock.gd" id="1_0xwbs"]
+[ext_resource type="Texture2D" uid="uid://bgvfvjnsxwmxo" path="res://addons/steam_devkit_notifier/assets/logo_steam.svg" id="2_4252p"]
 
-[node name="Devkit" type="Control"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kovi6"]
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+
+[node name="Devkit" type="Control" node_paths=PackedStringArray("title_name_input", "auto_upload_switch", "linux_only_switch", "notification_request")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -10,10 +17,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_0xwbs")
-title_name_path = NodePath("MarginContainer/VBoxContainer/TitleNameContainer/TitleNameInput")
-auto_upload_switch_path = NodePath("MarginContainer/VBoxContainer/AutoNotifyContainer/AutoNotifyCheckButton")
-linux_only_switch_path = NodePath("MarginContainer/VBoxContainer/NotifyLinuxContainer/NotifyLinuxCheckButton")
-request_path = NodePath("DevkitRequest")
+title_name_input = NodePath("MarginContainer/VBoxContainer/TitleNameContainer/TitleNameInput")
+auto_upload_switch = NodePath("MarginContainer/VBoxContainer/AutoNotifyContainer/AutoNotifyCheckButton")
+linux_only_switch = NodePath("MarginContainer/VBoxContainer/NotifyLinuxContainer/NotifyLinuxCheckButton")
+notification_request = NodePath("NotificationRequest")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -44,6 +51,7 @@ vertical_alignment = 1
 [node name="TitleNameInput" type="LineEdit" parent="MarginContainer/VBoxContainer/TitleNameContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+text = "Luminous_Journey"
 
 [node name="AutoNotifyContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -87,10 +95,22 @@ text = "Send notification"
 layout_mode = 2
 text = "Save settings"
 
-[node name="DevkitRequest" type="HTTPRequest" parent="."]
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxFlat_kovi6")
+
+[node name="StartDevkitButton" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Start Devkit Client"
+icon = ExtResource("2_4252p")
+expand_icon = true
+
+[node name="NotificationRequest" type="HTTPRequest" parent="."]
 
 [connection signal="text_changed" from="MarginContainer/VBoxContainer/TitleNameContainer/TitleNameInput" to="." method="_on_title_name_input_text_changed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/AutoNotifyContainer/AutoNotifyCheckButton" to="." method="_on_auto_notify_check_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/NotifyLinuxContainer/NotifyLinuxCheckButton" to="." method="_on_notify_linux_check_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/SendButton" to="." method="_on_send_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/SaveButton" to="." method="_on_save_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/StartDevkitButton" to="." method="_on_open_devkit_client_pressed"]
+[connection signal="request_completed" from="NotificationRequest" to="." method="_on_notification_request_completed"]
