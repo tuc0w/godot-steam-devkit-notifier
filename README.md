@@ -1,5 +1,12 @@
-# Godot Steam Devkit Notifier
-The Steam Devkit Notifier add-on allows you to automatically update your Game on your Steam Deck. It can also be used to manually trigger an update and the auto update can be disabled.
+<p align="center">
+  <img width="100px" src="https://raw.githubusercontent.com/tuc0w/godot-steam-devkit-notifier/main/images/icon.png" align="center" alt="Godot Steam Devkit Notifier" />
+  <h2 align="center">Godot Steam Devkit Notifier</h2>
+  <p align="center">The Steam Devkit Notifier add-on allows you to automatically update your Game on your Steam Deck. It can also be used to manually trigger an update and the auto update can be disabled.</p>
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/-Godot%204.2-478CBF?style=for-the-badge&logo=godotengine&logoColor=white&color=%23478CBF" alt="Godot 4.2">
+</p>
 
 ## Installation
 1. Install this plugin
